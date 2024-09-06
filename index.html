@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .game-container {
+            text-align: center;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+        }
+
+        .card-container {
+            display: grid;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .card-container.easy {
+            grid-template-columns: repeat(4, 100px);
+        }
+
+        .card-container.medium {
+            grid-template-columns: repeat(6, 100px);
+        }
+
+        .card-container.hard {
+            grid-template-columns: repeat(8, 100px);
+        }
+
+        .card {
+            width: 100px;
+            height: 100px;
+            background-color: #ccc; /* Gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem; /* Increased font size */
+            cursor: pointer;
+            border-radius: 5px;
+            position: relative;
+            transition: background-color 0.3s, color 0.3s;
+            color: transparent; /* Hide text initially */
+        }
+
+        .card.flipped {
+            background-color: #fff; /* White background when flipped */
+            color: #333; /* Show text color */
+        }
+
+        .card.matched {
+            cursor: default;
+        }
+
+        .score {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        #timer {
+            font-size: 1.2rem;
+            color: #ff0000;
+        }
+
+        /* Customization controls */
+        .customization {
+            margin-top: 20px;
+        }
+
+        .customization label {
+            margin-right: 10px;
+        }
+
+        select, input[type="range"] {
+            padding: 5px;
+            margin: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Memory Game</h1>
+        <div class="controls">
+            <label for="level">Choose Level:</label>
+            <select id="level">
+                <option value="easy">Easy (4x4)</option>
+                <option value="medium" selected>Medium (6x6)</option>
+                <option value="hard">Hard (8x8)</option>
+            </select>
+            <label for="mode">Choose Mode:</label>
+            <select id="mode">
+                <option value="classic">Classic</option>
+                <option value="timed">Timed</option>
+            </select>
+        </div>
+
+        <div class="score">
+            <p>Score: <span id="score">0</span></p>
+            <p id="timer"></p>
+        </div>
+
+        <div class="customization">
+            <label for="emoji-size">Emoji Size:</label>
+            <input type="range" id="emoji-size" min="2" max="5" step="0.5" value="3">
+            <label for="theme">Choose Theme:</label>
+            <select id="theme">
+                <option value="animals">Animals</option>
+                <option value="space">Space</option>
+                <option value="food">Food</option>
+            </select>
+        </div>
+
+        <div class="card-container" id="card-container">
+            <!-- Cards will be inserted here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themes = {
+                animals: ['🦄', '🐸', '🌟', '🚀', '🎨', '🍎', '🌈', '🏆'],
+                space: ['🚀', '🌕', '🛸', '🌟', '👽', '🛰️', '🌌', '🔭'],
+                food: ['🍎', '🍕', '🍔', '🍉', '🍇', '🍓', '🍒', '🍩']
+            };
+            let cardsChosen = [];
+            let cardsChosenIds = [];
+            let cardsMatched = [];
+            let score = 0;
+            let timerInterval;
+            let timeLeft = 0;
+
+            const cardContainer = document.getElementById('card-container');
+            const scoreDisplay = document.getElementById('score');
+            const timerDisplay = document.getElementById('timer');
+            const levelSelect = document.getElementById('level');
+            const modeSelect = document.getElementById('mode');
+            const emojiSizeInput = document.getElementById('emoji-size');
+            const themeSelect = document.getElementById('theme');
+
+            function createCards() {
+                const level = levelSelect.value;
+                const cardCount = getCardCount(level);
+                const theme = themeSelect.value;
+                const shuffledEmojis = shuffleArray([...themes[theme], ...themes[theme]].slice(0, cardCount));
+                cardContainer.innerHTML = ''; // Clear existing cards
+
+                shuffledEmojis.forEach((emoji, index) => {
+                    const card = document.createElement('div');
+                    card.classList.add('card');
+                    card.setAttribute('data-id', index);
+                    card.setAttribute('data-value', emoji);
+                    card.style.backgroundColor = getRandomColor(); // Assign a random color
+                    card.style.fontSize = `${emojiSizeInput.value}rem`; // Set emoji size
+                    card.addEventListener('click', flipCard);
+                    cardContainer.appendChild(card);
+                });
+
+                // Adjust grid size based on level
+                cardContainer.className = `card-container ${level}`;
+            }
+
+            function getCardCount(level) {
+                switch (level) {
+                    case 'easy':
+                        return 16;
+                    case 'medium':
+                        return 36;
+                    case 'hard':
+                        return 64;
+                    default:
+                        return 16;
+                }
+            }
+
+            function shuffleArray(array) {
+                let currentIndex = array.length, randomIndex;
+                while (currentIndex !== 0) {
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex--;
+                    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+                }
+                return array;
+            }
+
+            function getRandomColor() {
+                const letters = '0123456789ABCDEF';
+                let color = '#';
+                for (let i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            }
+
+            function flipCard() {
+                const clickedCard = this;
+                if (clickedCard.classList.contains('flipped') || cardsChosen.length === 2) return;
+
+                clickedCard.classList.add('flipped');
+                clickedCard.textContent = clickedCard.getAttribute('data-value');
+                cardsChosen.push(clickedCard.getAttribute('data-value'));
+                cardsChosenIds.push(clickedCard.getAttribute('data-id'));
+
+                if (cardsChosen.length === 2) {
+                    setTimeout(checkForMatch, 500);
+                }
+            }
+
+            function checkForMatch() {
+                const cards = document.querySelectorAll('.card');
+                const [firstId, secondId] = cardsChosenIds;
+                if (cardsChosen[0] === cardsChosen[1]) {
+                    cards[firstId].classList.add('matched');
+                    cards[secondId].classList.add('matched');
+                    score++;
+                    scoreDisplay.textContent = score;
+                    cardsMatched.push(cardsChosen[0]);
+                } else {
+                    cards[firstId].classList.remove('flipped');
+                    cards[firstId].textContent = ''; // Remove text for non-matched cards
+                    cards[secondId].classList.remove('flipped');
+                    cards[secondId].textContent = ''; // Remove text for non-matched cards
+                }
+                cardsChosen = [];
+                cardsChosenIds = [];
+
+                // Check for game end
+                if (cardsMatched.length === cardContainer.children.length / 2) {
+                    clearInterval(timerInterval);
+                    alert('Congratulations! You won!');
+                }
+            }
+
+            function startTimedMode() {
+                timeLeft = 60; // 60 seconds for timed mode
+                timerDisplay.textContent = `Time left: ${timeLeft}s`;
+                timerInterval = setInterval(() => {
+                    timeLeft--;
+                    timerDisplay.textContent = `Time left: ${timeLeft}s`;
+                    if (timeLeft <= 0) {
+                        clearInterval(timerInterval);
+                        alert('Time is up! Game Over.');
+                    }
+                }, 1000);
+            }
+
+            emojiSizeInput.addEventListener('input', createCards);
+            themeSelect.addEventListener('change', createCards);
+            levelSelect.addEventListener('change', createCards);
+            modeSelect.addEventListener('change', () => {
+                if (modeSelect.value === 'timed') startTimedMode();
+            });
+
+            createCards(); // Initialize game
+        });
+    </script>
+</body>
+</html>
