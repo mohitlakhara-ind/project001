@@ -1,103 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memory Game README</title>
-</head>
-<body>
-    <h1>Memory Game</h1>
+Memory Game
+Description
+The Memory Game is a fun and interactive card-matching game designed with HTML, CSS, and JavaScript. It offers a variety of features, including customizable emoji sizes, multiple difficulty levels, and different themes. Players can enjoy the game in both classic and timed modes, with responsive layouts that adapt to different screen sizes.
 
-    <h2>Description</h2>
-    <p>The Memory Game is a fun and interactive card-matching game designed with HTML, CSS, and JavaScript. It offers a variety of features, including customizable emoji sizes, multiple difficulty levels, and different themes. Players can enjoy the game in both classic and timed modes, with responsive layouts that adapt to different screen sizes.</p>
+Features
+Multiple Levels: Choose from Easy (4x4), Medium (6x6), and Hard (8x8) grids.
+Classic and Timed Modes: Play at your own pace or challenge yourself with a countdown timer.
+Customizable Emoji Size: Adjust the emoji size for a more personalized experience.
+Thematic Cards: Choose between fun themes like Animals, Space, and Food.
+Responsive Design: The game layout adjusts seamlessly to various screen sizes.
+Animated Card Flip: Smooth animations enhance the gaming experience.
+Match Notifications: Get immediate feedback when you match two cards.
+Screenshots
+Include screenshots of the game in action here (optional).
 
-    <h2>Features</h2>
-    <ul>
-        <li><strong>Multiple Levels</strong>: Choose from Easy (4x4), Medium (6x6), and Hard (8x8) grids.</li>
-        <li><strong>Classic and Timed Modes</strong>: Play at your own pace or challenge yourself with a countdown timer.</li>
-        <li><strong>Customizable Emoji Size</strong>: Adjust the emoji size for a more personalized experience.</li>
-        <li><strong>Thematic Cards</strong>: Choose between fun themes like Animals, Space, and Food.</li>
-        <li><strong>Responsive Design</strong>: The game layout adjusts seamlessly to various screen sizes.</li>
-        <li><strong>Animated Card Flip</strong>: Smooth animations enhance the gaming experience.</li>
-        <li><strong>Match Notifications</strong>: Get immediate feedback when you match two cards.</li>
-    </ul>
+Installation
+Requirements
+To run this project, you need:
 
-    <h2>Screenshots</h2>
-    <p>Include screenshots of the game in action here (optional).</p>
+A modern web browser (Chrome, Firefox, Safari, Edge)
+Basic understanding of HTML, CSS, and JavaScript to tweak the game settings (optional)
+Steps
+Clone the repository:
 
-    <h2>Installation</h2>
-    <h3>Requirements</h3>
-    <ul>
-        <li>A modern web browser (Chrome, Firefox, Safari, Edge)</li>
-        <li>Basic understanding of HTML, CSS, and JavaScript to tweak the game settings (optional)</li>
-    </ul>
+bash
+Copy code
+git clone https://github.com/mohitlakhara-ind/memory-game.git
+Navigate to the project directory:
 
-    <h3>Steps</h3>
-    <ol>
-        <li>Clone the repository:</li>
-        <pre><code>git clone https://github.com/yourusername/memory-game.git</code></pre>
-        <li>Navigate to the project directory:</li>
-        <pre><code>cd memory-game</code></pre>
-        <li>Open the <code>index.html</code> file in your browser:</li>
-        <pre><code>open index.html</code></pre>
-        <li>Alternatively, you can host the project on a web server.</li>
-    </ol>
+bash
+Copy code
+cd memory-game
+Open the index.html file in your browser:
 
-    <h2>How to Play</h2>
-    <ol>
-        <li>Select the <strong>level</strong> (Easy, Medium, Hard) and <strong>game mode</strong> (Classic or Timed) from the dropdown menus.</li>
-        <li>Customize the emoji size using the <strong>emoji size slider</strong>.</li>
-        <li>Choose a <strong>theme</strong> (Animals, Space, Food) to change the style of the cards.</li>
-        <li>Click on a card to flip it and reveal the emoji underneath.</li>
-        <li>Match pairs of cards by clicking on them. If the two cards match, they will stay flipped. If not, they will flip back after a short delay.</li>
-        <li>The game ends when all cards are successfully matched, or the timer runs out in timed mode.</li>
-        <li>Track your score and time using the counters provided at the top of the game.</li>
-    </ol>
+bash
+Copy code
+open index.html
+Alternatively, you can host the project on a web server.
 
-    <h2>Game Settings</h2>
-    <ul>
-        <li><strong>Level</strong>:
-            <ul>
-                <li>Easy: 4x4 grid (16 cards)</li>
-                <li>Medium: 6x6 grid (36 cards)</li>
-                <li>Hard: 8x8 grid (64 cards)</li>
-            </ul>
-        </li>
-        <li><strong>Mode</strong>:
-            <ul>
-                <li>Classic: No time limit</li>
-                <li>Timed: You have 60 seconds to match all the cards</li>
-            </ul>
-        </li>
-        <li><strong>Emoji Size</strong>: Use the range slider to adjust the size of the emojis (2x to 5x).</li>
-        <li><strong>Themes</strong>: Choose from Animals, Space, or Food.</li>
-    </ul>
+How to Play
+Select the level (Easy, Medium, Hard) and game mode (Classic or Timed) from the dropdown menus.
+You can customize the emoji size using the emoji size slider.
+Choose a theme (Animals, Space, Food) to change the style of the cards.
+Click on a card to flip it and reveal the emoji underneath.
+Match pairs of cards by clicking on them. If the two cards match, they will stay flipped. If not, they will flip back after a short delay.
+The game ends when all cards are successfully matched, or the timer runs out in timed mode.
+Track your score and time using the counters provided at the top of the game.
+Game Settings
+Level:
 
-    <h2>Customization</h2>
-    <p>You can easily modify the game to suit your needs:</p>
-    <ul>
-        <li><strong>Add More Themes</strong>: Update the <code>themes</code> object in <code>script.js</code> to add more themes.</li>
-        <li><strong>Change Grid Sizes</strong>: Modify the CSS grid properties in <code>style.css</code> to adjust the card layout.</li>
-        <li><strong>Adjust Timer</strong>: Change the time limit for the timed mode in <code>script.js</code>.</li>
-    </ul>
+Easy: 4x4 grid (16 cards)
+Medium: 6x6 grid (36 cards)
+Hard: 8x8 grid (64 cards)
+Mode:
 
-    <h2>Technologies Used</h2>
-    <ul>
-        <li><strong>HTML</strong>: Provides the structure of the game.</li>
-        <li><strong>CSS</strong>: Adds styling and animations to make the game visually appealing.</li>
-        <li><strong>JavaScript</strong>: Handles the game logic, including card matching, score tracking, and customizations.</li>
-    </ul>
+Classic: No time limit
+Timed: You have 60 seconds to match all the cards
+Emoji Size: Use the range slider to adjust the size of the emojis (2x to 5x).
 
-    <h2>Contribution</h2>
-    <p>Contributions are welcome! If you have any ideas or improvements, feel free to fork the repository and submit a pull request.</p>
+Themes: Choose from Animals, Space, or Food.
 
-    <h2>License</h2>
-    <p>This project is licensed under the MIT License. See the <a href="LICENSE">LICENSE</a> file for details.</p>
+Customization
+You can easily modify the game to suit your needs:
 
-    <h2>Acknowledgments</h2>
-    <ul>
-        <li>Special thanks to the open-source community for inspiration and guidance in building this project.</li>
-        <li>Emoji icons used in the game are sourced from standard Unicode emoji.</li>
-    </ul>
-</body>
-</html>
+Add More Themes: Update the themes object in script.js to add more themes.
+Change Grid Sizes: Modify the CSS grid properties in style.css to adjust the card layout.
+Adjust Timer: Change the time limit for the timed mode in script.js.
+Technologies Used
+HTML: Provides the structure of the game.
+CSS: Adds styling and animations to make the game visually appealing.
+JavaScript: Handles the game logic, including card matching, score tracking, and customizations.
+Contribution
+Contributions are welcome! If you have any ideas or improvements, feel free to fork the repository and submit a pull request.
+
+License
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+Acknowledgments
+Special thanks to the open-source community for inspiration and guidance in building this project.
+Emoji icons used in the game are sourced from standard Unicode emoji.
