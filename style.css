@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+}
+
+.game-container {
+    text-align: center;
+}
+
+.controls {
+    margin-bottom: 20px;
+}
+
+.card-container {
+    display: grid;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.card-container.easy {
+    grid-template-columns: repeat(4, 100px);
+}
+
+.card-container.medium {
+    grid-template-columns: repeat(6, 100px);
+}
+
+.card-container.hard {
+    grid-template-columns: repeat(8, 100px);
+}
+
+.card {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc; /* Gray background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem; /* Increased font size */
+    cursor: pointer;
+    border-radius: 5px;
+    position: relative;
+    transition: background-color 0.3s, color 0.3s;
+    color: transparent; /* Hide text initially */
+}
+
+.card.flipped {
+    background-color: #fff; /* White background when flipped */
+    color: #333; /* Show text color */
+}
+
+.card.matched {
+    cursor: default;
+}
+
+.score {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+#timer {
+    font-size: 1.2rem;
+    color: #ff0000;
+}
+
+/* Customization controls */
+.customization {
+    margin-top: 20px;
+}
+
+.customization label {
+    margin-right: 10px;
+}
+
+select, input[type="range"] {
+    padding: 5px;
+    margin: 5px;
+}
